@@ -301,10 +301,9 @@ class Latin2Utf8 {
     private function getRelevantColumns($table) {
         $columnNames = array_column($table['columns'],0);
         $columnTypes = array_column($table['columns'],1);
-        $columns = array_filter($columnNames, function($value) use ($columnNames, $columnTypes) {
-            $index = array_search($value, $columnNames);
-            return preg_match('/(.*TEXT.*)|(.*CHAR.*)/i', $columnTypes[$index]);
-        });
+        $columns = array_filter($columnNames, function($key) use ($columnTypes) {
+            return preg_match('/(.*TEXT.*)|(.*CHAR.*)/i', $columnTypes[$key]);
+        }, ARRAY_FILTER_USE_KEY);
         if (count($columns) > 0) {
             return $columns;
         }
