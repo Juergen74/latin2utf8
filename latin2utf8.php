@@ -88,7 +88,7 @@ class Latin2Utf8 {
             exit();
         }
 
-        $this->convertUTF8toLatinChars($this->replace);
+        $this->initLatinSearchCharacters();
         $this->maxSearchLength = 8;
         $this->getTables();
     }
@@ -98,13 +98,11 @@ class Latin2Utf8 {
     }
 
     /**
-     * Converts utf8 characters to latin replace chars
-     *
-     * @param [array] $chars
+     * Converts all utf8 characters in $this->replace to it's windows-1252/iso-8859-1 pendant and save them in $this->search
      */
-    private function convertUTF8toLatinChars($chars) {
+    private function initLatinSearchCharacters() {
         $result = [];
-        foreach ($chars as $char) {
+        foreach ($this->replace as $char) {
             $bytes = unpack("C*", $char);
             $chars = "";
             foreach ($bytes as $byte) {
@@ -146,8 +144,8 @@ class Latin2Utf8 {
     /**
      * Update all tables 
      *
-     * @param boolean $update false = preview mode | true = changes are written to the database
-     * @return integer total amount of replaced characters / or previewed characters
+     * @param boolean $update false = preview mode | true = updates are written to the database
+     * @return integer total amount of replaced/previewed characters
      */
     public function updateTables($update = false) {
         $this->printHtmlHeader();
@@ -169,8 +167,8 @@ class Latin2Utf8 {
     /**
      * Add search and replace strings for additional changes
      *
-     * @param string $search
-     * @param string $replace
+     * @param string $search    eg: "test@mail.de"
+     * @param string $replace   eg: "new@other.de"
      * @return void
      */
     public function addSearchReplace($search, $replace) {
@@ -241,8 +239,8 @@ class Latin2Utf8 {
         }
 
         if (count($updatedRow) > 0) {
-            $sql = $this->getUpdateSQL($tablename, $updatedRow, $primary);
             if ($update) {  // preview mode till explicitly set $update = true;
+                $sql = $this->getUpdateSQL($tablename, $updatedRow, $primary);
                 $this->mysqli->query($sql);
             }
         }
