@@ -2,7 +2,7 @@
 Convert latin1/windows-1252 chars to utf8 in mysql database  
   
 Earlier versions of wordpress were using latin-1 as collation for the mysql database, which sometimes leads to problems when moving sites.
-If you see a lot of chars like "Ã¤" or "Ã¶" instead of "ä" and "ö" – your most likely a German... :)
+If you see a lot of chars like "Ã¤" or "Ã¶" instead of "ä" and "ö" – you are most likely a German... :)
   
 This helper class loops through all your tables and replaces them with the apropriate utf8 "umlaut". Before you run this, you should change all your tables and column collation to something like "utf8mb4_unicode_520_ci" (the standard for wordpress), which can be easily done with phpMyAdmin.  
   
