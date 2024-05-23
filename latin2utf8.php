@@ -473,7 +473,6 @@ class Latin2Utf8 {
         .hl::after {
             display: inline-block;
             content: attr(title);
-            transform-origin: 0% 100%;
             width: 0;
         }
         
