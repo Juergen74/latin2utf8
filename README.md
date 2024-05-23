@@ -7,7 +7,7 @@ If you see a lot of chars like "Ã¤" or "Ã¶" instead of "ä" and "ö" – you
 This helper class loops through all your tables and replaces them with the apropriate utf8 "umlaut". Before you run this, you should change all your tables and column collation to something like "utf8mb4_unicode_520_ci" (the standard for wordpress), which can be easily done with phpMyAdmin.  
   
 Bonus feature: You can add your own "search" and "replace" strings with "addSearchReplace("search", "replace").  
-Wordpress sometimes is using serealized data. This class will recalculate those serealized strings automatically if there is any search & replace happening, that normally would corrupt this data.  
+Wordpress sometimes is using serialized data. This class will recalculate those serialized strings automatically if there is any search & replace happening, that normally would corrupt this data.  
   
 As long as "updateTables(false)" is set to false – nothing will happen, it will only produce a nice preview of all characters found, that will be replaced.  
 Set "updateTables(true)" to run the conversion.  
