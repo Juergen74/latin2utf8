@@ -175,8 +175,8 @@ class Latin2Utf8 {
         if (strlen($search) > $this->maxSearchLength) {
             $this->maxSearchLength = strlen($search);
         }
-        $this->search[] = $search;
-        $this->replace[] = $replace;
+        $this->search[] = preg_quote($search, "/");
+        $this->replace[] = preg_quote($replace, "/");
     }
 
     /**
